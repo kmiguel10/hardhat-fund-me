@@ -20,20 +20,40 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
+const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL || "https://eth-rinkeby" //pull in environment variables, install dotenv
+const PRIVATE_KEY = process.env.PRIVATE_KEY || "0xkey"
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "key"
+const COINTMARKETCAP_API_KEY = process.env.COINTMARKETCAP_API_KEY || "key"
+
 module.exports = {
-    solidity: "0.8.7",
+    //solidity: "0.8.7",
+    solidity: {
+        compilers: [
+            {
+                version: "0.8.8",
+            },
+            { version: "0.6.6" },
+        ],
+    },
+    defaultNetwork: "hardhat",
     networks: {
-        ropsten: {
-            url: process.env.ROPSTEN_URL || "",
-            accounts:
-                process.env.PRIVATE_KEY !== undefined
-                    ? [process.env.PRIVATE_KEY]
-                    : [],
+        rinkeby: {
+            url: RINKEBY_RPC_URL,
+            accounts: [PRIVATE_KEY],
+            chainId: 4,
+            blockConfirmations: 6, //wait
+        },
+        hardhat: {
+            chainId: 31337,
+            // gasPrice: 130000000000,
         },
     },
     gasReporter: {
-        enabled: process.env.REPORT_GAS !== undefined,
+        enabled: false,
+        outputFile: "gas-report.txt",
+        noColors: true,
         currency: "USD",
+        coinmarketcap: COINTMARKETCAP_API_KEY,
     },
     etherscan: {
         apiKey: process.env.ETHERSCAN_API_KEY,
