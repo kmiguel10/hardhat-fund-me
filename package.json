@@ -1,4 +1,7 @@
 {
+  "name":"hardhat-fund-me",
+  "author": "kent miguel",
+  "version": "1.0.0",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.13",
     "@nomiclabs/hardhat-etherscan": "^3.0.4",
@@ -24,5 +27,13 @@
   "dependencies": {
     "@chainlink/contracts": "^0.4.1",
     "hardhat-deploy": "^0.11.10"
+  },
+  "scripts": {
+    "test": "npx hardhat test",
+    "test:staging": "npx hardhat test --network rinkeby",
+    "lint" : "npx solhint 'contracts/*.sol'",
+    "lint:fix":"npx solhint 'contracs/*.sol' --fix",
+    "format":"npx prettier --write .",
+    "coverage": "npx hardhat coverage"
   }
 }
