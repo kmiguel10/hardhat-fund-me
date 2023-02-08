@@ -17,6 +17,6 @@ const INITIAL_ANSWER = 200000000000
 module.exports = {
     networkConfig,
     developmentChains,
-    DECIMALS,
+    DECIMALS,               
     INITIAL_ANSWER,
 }
